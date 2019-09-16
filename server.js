@@ -6,8 +6,10 @@ require('dotenv').config();
 //Express Middleware
 const helmet = require('helmet'); //create headers to protect security attacks
 const bodyParser = require('body-parser'); //turns response into usable format
-const cors = require('cors'); // allows/disables cross-site communication
-const morgan = require('morgan'); //logs requests
+/*
+const cors = require('cors') // allows/disables cross-site communication
+*/
+const morgan = require('morgan') //logs requests
 
 //connection to localhost
 var db = require('knex')({
@@ -16,7 +18,8 @@ var db = require('knex')({
     host : '127.0.0.1',
         user : 'shiro',
         password : 'zoom',
-        database : 'crudpractise1'
+        database : 'crudpractise1',
+
     }
 });
 
@@ -39,7 +42,9 @@ const corsOptions = {
     }
 };
 app.use(helmet());
+/*
 app.use(cors(corsOptions));
+*/
 app.use(bodyParser.json());
 app.use(morgan('combined')); //use 'tiny' or 'combined'
 

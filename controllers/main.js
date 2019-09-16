@@ -4,7 +4,7 @@ const  getTableData = (req, res, db) => {
             if (items.length){
                 res.json(items)
             }else {
-                res.json({dataExsists: 'false'})
+                res.json({dataExists: 'false'})
             }
         })
         .catch(err => console.log(err))
@@ -12,8 +12,8 @@ const  getTableData = (req, res, db) => {
 const postTableData = (req, res, db) => {
     const {freezer, chamber, rack, tray,box, box_label, sample_type, description, project, responsible_personel, box_barcode} = req.body;
     const added = new Date();
-    db('testtable').insert({freezer, chamber, rack, tray, box,box_label, sample_type, description, project, responsible_personel, box_barcode, added})
-        .returning('x')
+    db('testtable').insert({freezer, chamber, rack, tray, box,box_label, sample_type, description, project, responsible_personel, box_barcode})
+        .returning('*')
         .then(item => {
             res.json(item)
         })
@@ -27,7 +27,7 @@ const putTableData = (req, res, db) => {
         .then(item => {
             res.json(item)
         })
-                .catch(err =>res.status(400).json({dbError: 'db error'}))
+                .catch(err =>console.log(err))
 
 };
 const deleteTableData = (req, res,db) => {
@@ -36,7 +36,7 @@ const deleteTableData = (req, res,db) => {
         .then(() => {
             res.json({delete: 'true'})
         })
-        .catch(err => res.status(400).json({dbError: 'db error'}))
+        .catch(err => console.log(err))
 };
 
 module.exports = {
